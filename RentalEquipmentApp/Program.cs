@@ -1,5 +1,5 @@
+using Data;
 using Microsoft.EntityFrameworkCore;
-using RentalEquipmentApp.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 

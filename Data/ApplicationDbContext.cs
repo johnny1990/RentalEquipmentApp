@@ -1,9 +1,8 @@
 ﻿using Entities;
 using Microsoft.EntityFrameworkCore;
-using RentalEquipmentApp.Models;
 using System.Collections.Generic;
 
-namespace RentalEquipmentApp.Data
+namespace Data
 {
     public class ApplicationDbContext : DbContext
     {
