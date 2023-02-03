@@ -7,7 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RentalEquipmentApp", "Renta
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entities", "Entities\Entities.csproj", "{E1DA5CF1-44E0-4450-8EBA-B1815D1B6D14}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{B350DAC8-365D-445D-9E87-7E2B6A73C4A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Data\Data.csproj", "{B350DAC8-365D-445D-9E87-7E2B6A73C4A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contracts", "Contracts\Contracts.csproj", "{02F5D3E4-0B19-4745-80EA-CED8D016AA6B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repositories", "Repositories\Repositories.csproj", "{6572FB23-C25E-4FD7-B523-608CDAE21F55}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +31,14 @@ Global
 		{B350DAC8-365D-445D-9E87-7E2B6A73C4A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B350DAC8-365D-445D-9E87-7E2B6A73C4A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B350DAC8-365D-445D-9E87-7E2B6A73C4A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02F5D3E4-0B19-4745-80EA-CED8D016AA6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02F5D3E4-0B19-4745-80EA-CED8D016AA6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02F5D3E4-0B19-4745-80EA-CED8D016AA6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02F5D3E4-0B19-4745-80EA-CED8D016AA6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6572FB23-C25E-4FD7-B523-608CDAE21F55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6572FB23-C25E-4FD7-B523-608CDAE21F55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6572FB23-C25E-4FD7-B523-608CDAE21F55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6572FB23-C25E-4FD7-B523-608CDAE21F55}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

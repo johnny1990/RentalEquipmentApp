@@ -1,10 +1,16 @@
+using Contracts;
 using Data;
 using Microsoft.EntityFrameworkCore;
+using Repositories;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Add services to the container.
+builder.Services.AddScoped<IEquipmentsRepository, EquipmentsRepository>();
 
 // add
 builder.Services.AddDbContext<ApplicationDbContext>(
