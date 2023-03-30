@@ -135,7 +135,7 @@ namespace RentalEquipmentApp.Controllers
         private bool EquipmentExists(int id)
         {
             return true;
-            //return _eqRepository.GetEquipmentByID(id);//.Any(e => e.Id == id);
+           
         }
     }
 }
