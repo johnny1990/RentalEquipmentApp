@@ -21,7 +21,7 @@ namespace Repositories
             Save();
         }
 
-        public Equipments GetEquipmentByID(int eqId)
+        public Equipments GetEquipmentByID(int? eqId)
         {
             return _dbContext.Equipments.Find(eqId);
         }
