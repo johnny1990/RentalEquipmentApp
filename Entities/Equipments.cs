@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities
 {
@@ -15,5 +17,9 @@ namespace Entities
 
         [Display(Name = "Equipment Image")]
         public byte[]? Image { get; set; }
+
+        //[NotMapped]
+        //[DisplayName("Upload File")]
+        //public IFormFile ImageFile { get; set; }
     }
 }

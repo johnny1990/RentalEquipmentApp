@@ -5,19 +5,19 @@ using Microsoft.EntityFrameworkCore;
 
 namespace RentalEquipmentApp.Controllers
 {
-    public class EquipmentsController : Controller
+    public class SocietiesController : Controller
     {
-        private readonly IEquipmentsRepository _eqRepository;
+        private readonly ISocietiesRepository _socRepository;
 
-        public EquipmentsController(IEquipmentsRepository eqRepository)
+        public SocietiesController(ISocietiesRepository socRepository)
         {
-            _eqRepository = eqRepository;
+            _socRepository = socRepository;
         }
 
         public IActionResult Index()
         {
-            var equipments = _eqRepository.GetEquipments();
-            return View(equipments.ToList());
+            var societies = _socRepository.GetSocieties();
+            return View(societies.ToList());
         }
 
         public IActionResult Details(int? id)
@@ -27,14 +27,14 @@ namespace RentalEquipmentApp.Controllers
                 return NotFound();
             }
 
-            var equipment = _eqRepository.GetEquipmentByID(id);
+            var soc = _socRepository.GetSocietyByID(id);
 
-            if (equipment == null)
+            if (soc == null)
             {
                 return NotFound();
             }
 
-            return View(equipment);
+            return View(soc);
         }
 
         public IActionResult Create()
@@ -45,17 +45,16 @@ namespace RentalEquipmentApp.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Price,Image")] Equipments eq)
+        public async Task<IActionResult> Create([Bind("Id,Name")] Societies soc)
         {
             if (ModelState.IsValid)
             {
-                 _eqRepository.InsertEquipment(eq);
-                 _eqRepository.Save();
+                _socRepository.Insert(soc);
+                _socRepository.Save();
                 return RedirectToAction(nameof(Index));
             }
-            return View(eq);
+            return View(soc);
         }
-
 
         public async Task<IActionResult> Edit(int? id)
         {
@@ -64,19 +63,19 @@ namespace RentalEquipmentApp.Controllers
                 return NotFound();
             }
 
-            var eq = _eqRepository.GetEquipmentByID(id);
-            if (eq == null)
+            var soc = _socRepository.GetSocietyByID(id);
+            if (soc == null)
             {
                 return NotFound();
             }
-            return View(eq);
+            return View(soc);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Price,Image")] Equipments eq)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Societies soc)
         {
-            if (id != eq.Id)
+            if (id != soc.Id)
             {
                 return NotFound();
             }
@@ -85,13 +84,13 @@ namespace RentalEquipmentApp.Controllers
             {
                 try
                 {
-                    _eqRepository.UpdateEquipment(eq);
-                    _eqRepository.Save();
+                    _socRepository.Update(soc);
+                    _socRepository.Save();
 
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!EquipmentExists(eq.Id))
+                    if (!EquipmentExists(soc.Id))
                     {
                         return NotFound();
                     }
@@ -102,7 +101,7 @@ namespace RentalEquipmentApp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(eq);
+            return View(soc);
         }
 
         public async Task<IActionResult> Delete(int? id)
@@ -112,7 +111,7 @@ namespace RentalEquipmentApp.Controllers
                 return NotFound();
             }
 
-            var eq = _eqRepository.GetEquipmentByID(id);
+            var eq = _socRepository.GetSocietyByID(id);
             if (eq == null)
             {
                 return NotFound();
@@ -125,9 +124,9 @@ namespace RentalEquipmentApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var eq = _eqRepository.GetEquipmentByID(id);
-            _eqRepository.DeleteEquipment(id);
-            _eqRepository.Save();
+            var eq = _socRepository.GetSocietyByID(id);
+            _socRepository.Delete(id);
+            _socRepository.Save();
 
             return RedirectToAction(nameof(Index));
         }
@@ -135,7 +134,7 @@ namespace RentalEquipmentApp.Controllers
         private bool EquipmentExists(int id)
         {
             return true;
-           
+
         }
     }
 }
