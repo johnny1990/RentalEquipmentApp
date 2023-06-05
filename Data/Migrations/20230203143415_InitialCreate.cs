@@ -46,15 +46,14 @@ namespace Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    SocietyId = table.Column<int>(type: "int", nullable: false),
-                    SocietiesId = table.Column<int>(type: "int", nullable: false)
+                    SocietyId = table.Column<int>(type: "int", nullable: false)                   
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Rentals", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Rentals_Societies_SocietiesId",
-                        column: x => x.SocietiesId,
+                        name: "FK_Rentals_Societies_SocietyId",
+                        column: x => x.SocietyId,
                         principalTable: "Societies",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -92,9 +91,9 @@ namespace Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Rentals_SocietiesId",
+                name: "IX_Rentals_SocietyId",
                 table: "Rentals",
-                column: "SocietiesId");
+                column: "SocietyId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_RentalsData_EquipmentsId",

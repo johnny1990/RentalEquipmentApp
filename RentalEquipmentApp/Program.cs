@@ -12,6 +12,7 @@ builder.Services.AddControllersWithViews();
 // Add services to the container.
 builder.Services.AddScoped<IEquipmentsRepository, EquipmentsRepository>();
 builder.Services.AddScoped<ISocietiesRepository, SocietiesRepository>();
+builder.Services.AddScoped<IRentalsRepository, RentalsRepository>();
 
 // add
 builder.Services.AddDbContext<ApplicationDbContext>(

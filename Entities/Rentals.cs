@@ -11,9 +11,8 @@ namespace Entities
         [Display(Name = "Rental date")]
         public DateTime? Date { get; set; }
 
-        [Display(Name = "Rental date")]
+        [Display(Name = "Society")]
         public int SocietyId { get; set; }
-        public  Societies Societies { get; set; }
 
    
     }

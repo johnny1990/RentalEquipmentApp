@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Entities.Rentals>
+
+@{
+    ViewData["Title"] = "Rentals";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Add new rental</a>
+</p>
+<table class="table" border="1">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SocietyId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SocietyId)
+                </td>
+                <td>
+                   @* d*@
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

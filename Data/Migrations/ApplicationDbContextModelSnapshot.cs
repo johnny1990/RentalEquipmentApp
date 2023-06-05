@@ -56,7 +56,7 @@ namespace Data.Migrations
                     b.Property<DateTime?>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("SocietiesId")
+                    b.Property<int>("SocietyId")
                         .HasColumnType("int");
 
                     b.Property<int>("SocietyId")
@@ -64,7 +64,7 @@ namespace Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SocietiesId");
+                    b.HasIndex("SocietyId");
 
                     b.ToTable("Rentals");
                 });
@@ -129,7 +129,7 @@ namespace Data.Migrations
                 {
                     b.HasOne("Entities.Societies", "Societies")
                         .WithMany()
-                        .HasForeignKey("SocietiesId")
+                        .HasForeignKey("SocietyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
