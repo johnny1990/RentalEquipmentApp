@@ -14,20 +14,20 @@ namespace RentalEquipmentApp.Controllers
             _eqRepository = eqRepository;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             var equipments = _eqRepository.GetEquipments();
-            return View(equipments.ToList());
+            return View(await Task.FromResult(equipments.ToList()));
         }
 
-        public IActionResult Details(int? id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var equipment = _eqRepository.GetEquipmentByID(id);
+            var equipment = await Task.FromResult(_eqRepository.GetEquipmentByID(id));
 
             if (equipment == null)
             {
@@ -37,9 +37,9 @@ namespace RentalEquipmentApp.Controllers
             return View(equipment);
         }
 
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            return View();
+            return await Task.FromResult(View());
         }
 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -51,7 +51,7 @@ namespace RentalEquipmentApp.Controllers
             {
                  _eqRepository.InsertEquipment(eq);
                  _eqRepository.Save();
-                return RedirectToAction(nameof(Index));
+                return await Task.FromResult(RedirectToAction(nameof(Index)));
             }
             return View(eq);
         }
@@ -64,7 +64,7 @@ namespace RentalEquipmentApp.Controllers
                 return NotFound();
             }
 
-            var eq = _eqRepository.GetEquipmentByID(id);
+            var eq = await Task.FromResult(_eqRepository.GetEquipmentByID(id));
             if (eq == null)
             {
                 return NotFound();
@@ -100,7 +100,7 @@ namespace RentalEquipmentApp.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return await Task.FromResult(RedirectToAction(nameof(Index))); ;
             }
             return View(eq);
         }
@@ -112,7 +112,7 @@ namespace RentalEquipmentApp.Controllers
                 return NotFound();
             }
 
-            var eq = _eqRepository.GetEquipmentByID(id);
+            var eq = await Task.FromResult(_eqRepository.GetEquipmentByID(id));
             if (eq == null)
             {
                 return NotFound();
@@ -125,7 +125,7 @@ namespace RentalEquipmentApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var eq = _eqRepository.GetEquipmentByID(id);
+            var eq = await Task.FromResult(_eqRepository.GetEquipmentByID(id));
             _eqRepository.DeleteEquipment(id);
             _eqRepository.Save();
 

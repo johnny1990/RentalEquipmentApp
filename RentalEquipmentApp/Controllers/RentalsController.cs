@@ -17,21 +17,21 @@ namespace RentalEquipmentApp.Controllers
             _socRepository = socRepository;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             var rentals = _rnRepository.GetRentals();
-            return View(rentals.ToList());
+            return View(await Task.FromResult(rentals.ToList()));
         }
 
 
-        public IActionResult Details(int? id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var rn = _rnRepository.GetRentalByID(id);
+            var rn = await Task.FromResult(_rnRepository.GetRentalByID(id));
 
             if (rn == null)
             {
@@ -41,22 +41,22 @@ namespace RentalEquipmentApp.Controllers
             return View(rn);
         }
 
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
             ViewData["Societies"] = new SelectList(_socRepository.GetSocieties(), "Id", "Name");
-            return View();
+            return await Task.FromResult(View());
         }
 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("Id,Date,SocietyId")] Rentals rn)
+        public async Task<IActionResult> Create([Bind("Id,Date,SocietyId")] Rentals rn)
         {
             if (ModelState.IsValid)
             {
                 _rnRepository.InsertRental(rn);
                 _rnRepository.Save();
-                return RedirectToAction(nameof(Index));
+                return await Task.FromResult(RedirectToAction(nameof(Index)));
             }
             return View(rn);
         }    

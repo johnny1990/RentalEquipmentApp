@@ -14,20 +14,20 @@ namespace RentalEquipmentApp.Controllers
             _socRepository = socRepository;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             var societies = _socRepository.GetSocieties();
-            return View(societies.ToList());
+            return View(await Task.FromResult(societies.ToList()));
         }
 
-        public IActionResult Details(int? id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var soc = _socRepository.GetSocietyByID(id);
+            var soc = await Task.FromResult(_socRepository.GetSocietyByID(id));
 
             if (soc == null)
             {
@@ -37,9 +37,9 @@ namespace RentalEquipmentApp.Controllers
             return View(soc);
         }
 
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            return View();
+            return await Task.FromResult(View());
         }
 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -51,7 +51,7 @@ namespace RentalEquipmentApp.Controllers
             {
                 _socRepository.Insert(soc);
                 _socRepository.Save();
-                return RedirectToAction(nameof(Index));
+                return await Task.FromResult(RedirectToAction(nameof(Index)));
             }
             return View(soc);
         }
@@ -63,7 +63,7 @@ namespace RentalEquipmentApp.Controllers
                 return NotFound();
             }
 
-            var soc = _socRepository.GetSocietyByID(id);
+            var soc = await Task.FromResult(_socRepository.GetSocietyByID(id));
             if (soc == null)
             {
                 return NotFound();
@@ -99,7 +99,7 @@ namespace RentalEquipmentApp.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return await Task.FromResult(RedirectToAction(nameof(Index)));
             }
             return View(soc);
         }
@@ -111,7 +111,7 @@ namespace RentalEquipmentApp.Controllers
                 return NotFound();
             }
 
-            var eq = _socRepository.GetSocietyByID(id);
+            var eq = await Task.FromResult(_socRepository.GetSocietyByID(id));
             if (eq == null)
             {
                 return NotFound();
@@ -124,7 +124,7 @@ namespace RentalEquipmentApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var eq = _socRepository.GetSocietyByID(id);
+            var eq = await Task.FromResult(_socRepository.GetSocietyByID(id));
             _socRepository.Delete(id);
             _socRepository.Save();
 
