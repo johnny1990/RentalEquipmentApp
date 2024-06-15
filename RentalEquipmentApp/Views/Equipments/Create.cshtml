@@ -1,4 +1,5 @@
-﻿@model Entities.Equipments
+﻿ @addTagHelper*, Microsoft.AspNetCore.Mvc.TagHelpers
+@model Entities.Equipments
 @{
     ViewData["Title"] = "Create";
 }
@@ -8,35 +9,30 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form method="post" enctype="multipart/form-data" asp-controller="Equipments" asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-
+            &nbsp;
             <div class="form-group">
                 <label asp-for="Price" class="control-label"></label>
                 <input asp-for="Price" class="form-control" />
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
-
-            @*<div class="form-group">
-                <label asp-for="Image" class="control-label"></label>
-                <input asp-for="Image" class="form-control" />
-                <span asp-validation-for="Image" class="text-danger"></span>
-            </div>*@
-
+            &nbsp;
             <div class="form-group">
                 <label asp-for="Image" class="control-label"></label>
-                <input asp-for="Image" accept="image/*" />
+                <input type="file" name="postedFile" class="form-control" />
                 <span asp-validation-for="Image" class="text-danger"></span>
             </div>
-
+            &nbsp;
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
+            &nbsp;
         </form>
     </div>
 </div>

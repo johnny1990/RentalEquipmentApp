@@ -45,13 +45,23 @@ namespace RentalEquipmentApp.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Price,Image")] Equipments eq)
+        public async Task<IActionResult> Create([Bind("Id,Name,Price,Image")] Equipments eq, IFormFile postedFile)
         {
-            if (ModelState.IsValid)
+            string fileName = Path.GetFileName(postedFile.FileName);
+            string contentType = postedFile.ContentType;
+            byte[] fileBytes;
+            using (var ms = new MemoryStream())
             {
+                postedFile.CopyTo(ms);
+                fileBytes = ms.ToArray();
+            
+
+            if (ModelState.IsValid)
+            {    eq.Image = fileBytes;
                  _eqRepository.InsertEquipment(eq);
                  _eqRepository.Save();
                 return await Task.FromResult(RedirectToAction(nameof(Index)));
+            }
             }
             return View(eq);
         }
@@ -74,33 +84,42 @@ namespace RentalEquipmentApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Price,Image")] Equipments eq)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Price,Image")] Equipments eq, IFormFile postedFile)
         {
+            string fileName = Path.GetFileName(postedFile.FileName);
+            string contentType = postedFile.ContentType;
+            byte[] fileBytes;
+
             if (id != eq.Id)
             {
                 return NotFound();
             }
-
-            if (ModelState.IsValid)
+            using (var ms = new MemoryStream())
             {
-                try
+                postedFile.CopyTo(ms);
+                fileBytes = ms.ToArray();
+                if (ModelState.IsValid)
                 {
-                    _eqRepository.UpdateEquipment(eq);
-                    _eqRepository.Save();
+                    try
+                    {
+                        eq.Image = fileBytes;
+                        _eqRepository.UpdateEquipment(eq);
+                        _eqRepository.Save();
 
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!EquipmentExists(eq.Id))
-                    {
-                        return NotFound();
                     }
-                    else
+                    catch (DbUpdateConcurrencyException)
                     {
-                        throw;
+                        if (!EquipmentExists(eq.Id))
+                        {
+                            return NotFound();
+                        }
+                        else
+                        {
+                            throw;
+                        }
                     }
+                    return await Task.FromResult(RedirectToAction(nameof(Index))); ;
                 }
-                return await Task.FromResult(RedirectToAction(nameof(Index))); ;
             }
             return View(eq);
         }
